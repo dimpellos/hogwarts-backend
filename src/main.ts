@@ -24,7 +24,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document); // available at /api
 
-  // 🚀 Start backend server on port 3000
-  await app.listen(3000);
+  // Use process.env.PORT for Render deployment
+  const PORT = process.env.PORT || 3000;
+  await app.listen(PORT);
+  console.log(`Server is running on port ${PORT}`);
 }
 bootstrap();
