@@ -6,15 +6,14 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // ✅ Allow React/Next.js frontend on port 3001
   app.enableCors({
-    origin: 'http://localhost:3001',
+    origin: ['http://localhost:3001', 'https://hogwarts-frontend.vercel.app'],
   });
 
-  // 🔐 Global validation
+  // Global validation
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
 
-  // 📘 Swagger setup
+  // Swagger setup
   const config = new DocumentBuilder()
     .setTitle('Hogwarts API')
     .setDescription('API to manage Hogwarts Houses')
