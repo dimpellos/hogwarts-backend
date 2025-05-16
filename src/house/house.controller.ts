@@ -19,9 +19,9 @@ export class HouseController {
   }
 
   @Get('search')
-  @ApiQuery({ name: 'query', required: true, example: 'ff' })
-  search(@Query('query') query: string) {
-    return this.houseService.findByNameContains(query);
+  @ApiQuery({ name: 'name', required: true, example: 'gry' })
+  search(@Query('name') name: string) {
+    return this.houseService.searchByName(name);
   }
 
   @Get(':id')

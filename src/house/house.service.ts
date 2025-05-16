@@ -15,16 +15,20 @@ export class HouseService {
     return this.prisma.house.findMany();
   }
 
-  async findByNameContains(query: string) {
+  async searchByName(name: string) {
+    if (!name.trim()) {
+      return []; // or throw new BadRequestException('Name is required');
+    }
+  
     return this.prisma.house.findMany({
       where: {
         name: {
-          contains: query,
-          mode: 'insensitive', // makes it case-insensitive
+          contains: name,
+          mode: 'insensitive',
         },
       },
     });
-  }  
+  }
 
   async findOne(id: number) {
     const house = await this.prisma.house.findUnique({ where: { id } });
